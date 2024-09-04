@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>About Us</h2>
+<h4>
+  {% if stack == "MERN" %}
+  Welcome to <strong>Programming Hero</strong>
+  {% elif stack == "Django" %}
+  Welcome to <strong>Ostad</strong>
+  {% else %}
+  Welcome to <strong>Web Development</strong>
+  {% endif %}
+</h4>
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos doloribus nesciunt animi vitae excepturi provident
+  asperiores ducimus quidem dolorum iusto?</p>
+{% endblock %}
+
+{% block title %}
+About
+{% endblock %}
+
+{% block headline %}
+About Page
+{% endblock %}

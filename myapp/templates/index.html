@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>{{ title }}</h2>
+<h4>{{ content }}</h4>
+<p>
+  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos doloribus
+  nesciunt animi vitae excepturi provident asperiores ducimus quidem dolorum
+  iusto?
+</p>
+{% load static %}
+<img width="380" src="{% static 'images/img1.jpg' %}" alt="smartphone addiction">
+{% endblock %}
+
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block headline %}
+Home Page
+{% endblock %}
