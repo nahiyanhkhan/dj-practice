@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Task Details</h1>
+<p><strong> Task Title:</strong> {{ task.title }}</p>
+<p><strong> Task Description:</strong> {{ task.description }}</p>
+<p><strong> Completed:</strong>{% if task.completed is False %} No {% else %} Yes {% endif %}</p>
+
+{% endblock %}
