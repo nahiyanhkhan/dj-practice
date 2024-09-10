@@ -6,11 +6,11 @@
 <ul>
     {% for task in tasks %}
     <li>
-        <a href="{% url 'task_details' task.pk %}">{{ task.title }}</a> | 
-        {{ task.description }}  | 
+        <a href="{% url 'task_details' task.pk %}">{{ task.title }}</a> |
+        {{ task.description }} |
         {% if task.completed == True %} Completed ✅
-        {% else %} Pending ❌
-        {% endif %} 
+        {% else %} Pending ❌ | {{ task.due_date }}
+        {% endif %}
     </li>
     {% endfor %}
 </ul>
