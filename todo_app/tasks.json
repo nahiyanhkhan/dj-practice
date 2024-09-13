@@ -6,7 +6,8 @@
             "title": "Buy milk",
             "description": "Get 2% milk from the store",
             "completed": false,
-            "created_at": "2022-01-01 12:00:00"
+            "created_at": "2022-01-01 12:00:00",
+            "due_date": "2022-11-12"
         }
     },
     {
@@ -16,7 +17,8 @@
             "title": "Walk the dog",
             "description": "Take Max for a 30-minute walk",
             "completed": true,
-            "created_at": "2022-01-01 12:00:00"
+            "created_at": "2022-01-01 12:00:00",
+            "due_date": "2022-11-12"
         }
     },
     {
@@ -26,7 +28,8 @@
             "title": "Do laundry",
             "description": "Wash, dry, and fold clothes",
             "completed": false,
-            "created_at": "2022-01-01 12:00:00"
+            "created_at": "2022-01-01 12:00:00",
+            "due_date": "2022-11-12"
         }
     }
 ]

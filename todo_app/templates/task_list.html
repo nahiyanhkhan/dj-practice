@@ -3,6 +3,13 @@
 {% block content %}
 
 <h1>All Tasks List</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ search_form.as_p }}
+    <button type="submit">Search</button>
+</form>
+
 <ul>
     {% for task in tasks %}
     <li>
@@ -21,6 +28,8 @@
 <a href="/tasks/?completed=0">Pending Tasks</a>
 <br>
 <a href="/tasks/">All Tasks</a>
+<br>
+<a href="/tasks/add/">Add Todo</a>
 <br>
 
 
