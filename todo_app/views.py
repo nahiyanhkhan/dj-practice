@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Task
 from .forms import SearchForm, AddTodoForm
+from django.http import HttpResponse
 
 
 # Create your views here.
@@ -44,9 +45,19 @@ def add_todo(request):
         add_todo_form = AddTodoForm(request.POST)
         if add_todo_form.is_valid():
             add_todo_form.save()
+            return redirect("task_list")
 
     add_todo_form = AddTodoForm()
 
     context = {"add_todo_form": add_todo_form}
 
     return render(request, "add_todo.html", context=context)
+
+
+def delete_todo(request, pk):
+    try:
+        task = Task.objects.get(pk=pk)
+        task.delete()
+        return redirect("task_list")
+    except:
+        return HttpResponse("Task does not exist!!!")
