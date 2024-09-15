@@ -13,13 +13,15 @@
 <ul>
     {% for task in tasks %}
     <li>
-        ({{ task.id }})
+        ({{ forloop.counter }})
+        <!-- | {{ task.id }} | -->
         <a href="{% url 'task_details' task.pk %}">{{ task.title }}</a> |
         {{ task.description }} |
         {% if task.completed == True %} Completed ✅
         {% else %} Pending ❌ | {{ task.due_date }}
         {% endif %} |
-        <a href="{% url 'delete_todo' task.pk %}">Delete</a>
+        <a href="{% url 'update_todo' task.pk %}">Update</a> |
+        <a href="{% url 'delete_todo' task.pk %}">Delete</a> |
     </li>
     {% endfor %}
 </ul>

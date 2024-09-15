@@ -1,7 +1,12 @@
+from pickletools import read_uint1
+from re import escape
 from django.shortcuts import render, redirect
+
+import todo_app
 from .models import Task
 from .forms import SearchForm, AddTodoForm
 from django.http import HttpResponse
+from django.urls import reverse
 
 
 # Create your views here.
@@ -13,6 +18,8 @@ def task_list(request):
 
     if search_form.is_valid():
         query = search_form.cleaned_data.get("query")
+    else:
+        return HttpResponse("Invalid search query")
 
     if completed == "1":
         task_list = task_list.filter(completed=True)
@@ -34,8 +41,20 @@ def task_list(request):
 
 
 def task(request, pk):
-    task = Task.objects.get(pk=pk)
-    return render(request, "task_details.html", {"task": task})
+    try:
+        task = Task.objects.get(pk=pk)
+        return render(request, "task_details.html", {"task": task})
+    except Task.DoesNotExist:
+        # 'home' is the fallback URL name
+        previous_page = request.META.get("HTTP_REFERER", reverse("task_list"))
+        message = """
+        <h1>Task does not exist!!!</h1>
+        <p><a href="{}">Go back to the previous page</a></p>
+        """.format(
+            previous_page
+        )
+        return HttpResponse(message)
+        # return HttpResponse("Task does not exist!!!")
 
 
 def add_todo(request):
@@ -46,6 +65,9 @@ def add_todo(request):
         if add_todo_form.is_valid():
             add_todo_form.save()
             return redirect("task_list")
+        else:
+            return HttpResponse("Invalid form data")
+            # return render(request, "add_todo.html", {"add_todo_form": add_todo_form})
 
     add_todo_form = AddTodoForm()
 
@@ -59,5 +81,25 @@ def delete_todo(request, pk):
         task = Task.objects.get(pk=pk)
         task.delete()
         return redirect("task_list")
-    except:
+    except Task.DoesNotExist:
+        return HttpResponse("Task does not exist!!!")
+
+
+def update_todo(request, pk):
+    # return HttpResponse("Update Todo " + str(pk))
+    try:
+        task = Task.objects.get(pk=pk)
+
+        if request.method == "POST":
+            todo_form = AddTodoForm(request.POST, instance=task)
+            if todo_form.is_valid():
+                todo_form.save()
+                return redirect("task_list")
+            else:
+                return render(request, "update_todo.html", {"todo_form": todo_form})
+
+        todo_form = AddTodoForm(instance=task)
+        return render(request, "update_todo.html", {"todo_form": todo_form})
+
+    except Task.DoesNotExist:
         return HttpResponse("Task does not exist!!!")

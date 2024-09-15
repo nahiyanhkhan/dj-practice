@@ -2,19 +2,19 @@
 
 {% block content %}
 
-<h1 style="text-align: center;">Add Todo</h1>
+<h1 style="text-align: center;">Update Todo</h1>
 
 <form method="post" style="width: 50%;">
     {% csrf_token %}
 
-    <!-- {{ add_todo_form.as_p }} -->
-    {% for field in add_todo_form %}
+    <!-- {{ todo_form.as_p }} -->
+    {% for field in todo_form %}
     <div style="padding: 15px;">
         {{ field.label }}: {{ field }}
     </div>
     {% endfor %}
 
-    <button type="submit">Add Todo</button>
+    <button type="submit">Update Todo</button>
 </form>
 
 {% endblock %}
