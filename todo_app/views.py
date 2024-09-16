@@ -144,15 +144,15 @@ def all_books(request):
     return JsonResponse({"books": list(books)})
 
 
-def book(request, book_id):
-    book = Book.objects.get(id=book_id)
-    # return JsonResponse({"book": model_to_dict(book)})
-    book_details = {
-        "title": book.title,
-        "description": book.description,
-        "author": book.author.first_name + " " + book.author.last_name,
-    }
-    return JsonResponse({"book": book_details})
+# def book(request, book_id):
+#     book = Book.objects.get(id=book_id)
+#     # return JsonResponse({"book": model_to_dict(book)})
+#     book_details = {
+#         "title": book.title,
+#         "description": book.description,
+#         "author": book.author.first_name + " " + book.author.last_name,
+#     }
+#     return JsonResponse({"book": book_details})
 
 
 def author(request, author_id):
@@ -161,6 +161,22 @@ def author(request, author_id):
         "first_name": author.first_name,
         "last_name": author.last_name,
         "bio": author.bio,
-        "book": [book.title for book in author.books.all()],
+        "books": [book.title for book in author.books.all()],
     }
     return JsonResponse({"book": author_details})
+
+
+# ---------- Many to Many ----------
+
+
+def book(request, book_id):
+    book = Book.objects.get(id=book_id)
+    # return JsonResponse({"book": model_to_dict(book)})
+    book_details = {
+        "title": book.title,
+        "description": book.description,
+        "author": [
+            author.first_name + " " + author.last_name for author in book.author.all()
+        ],
+    }
+    return JsonResponse({"book": book_details})
