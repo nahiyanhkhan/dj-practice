@@ -1,0 +1,116 @@
+[
+  {
+    "model": "todo_app.author",
+    "pk": 1,
+    "fields": {
+      "first_name": "Humayun",
+      "last_name": "Ahmed",
+      "bio": "Bangladeshi author"
+    }
+  },
+  {
+    "model": "todo_app.author",
+    "pk": 2,
+    "fields": {
+      "first_name": "Kazi",
+      "last_name": "Nazrul Islam",
+      "bio": "Bangladeshi national poet and revolutionary writer"
+    }
+  },
+  {
+    "model": "todo_app.author",
+    "pk": 3,
+    "fields": {
+      "first_name": "Jibananda",
+      "last_name": "Das",
+      "bio": "Renowned Bangladeshi poet and writer"
+    }
+  },
+  {
+    "model": "todo_app.author",
+    "pk": 4,
+    "fields": {
+      "first_name": "Syed",
+      "last_name": "Shamsul Haque",
+      "bio": "Prominent Bangladeshi poet, novelist, and playwright"
+    }
+  },
+  {
+    "model": "todo_app.author",
+    "pk": 5,
+    "fields": {
+      "first_name": "Begum",
+      "last_name": "Rokeya",
+      "bio": "Pioneering Bangladeshi feminist writer and social reformer"
+    }
+  },
+  {
+    "model": "todo_app.author",
+    "pk": 6,
+    "fields": {
+      "first_name": "Shamsur",
+      "last_name": "Rahman",
+      "bio": "Celebrated Bangladeshi poet and journalist"
+    }
+  },
+  {
+    "model": "todo_app.book",
+    "pk": 7,
+    "fields": {
+      "title": "Bidrohi",
+      "description": "A revolutionary poem by Kazi Nazrul Islam, symbolizing rebellion against oppression.",
+      "pub_date": "1922-12-06",
+      "author": 2
+    }
+  },
+  {
+    "model": "todo_app.book",
+    "pk": 8,
+    "fields": {
+      "title": "Banalata Sen",
+      "description": "One of the most famous poems by Jibananda Das, depicting the eternal beauty of a woman named Banalata Sen.",
+      "pub_date": "1942-04-01",
+      "author": 3
+    }
+  },
+  {
+    "model": "todo_app.book",
+    "pk": 9,
+    "fields": {
+      "title": "Payer Awaj Pawa Jay",
+      "description": "A powerful play that reflects the socio-political issues of Bangladesh, written by Syed Shamsul Haque.",
+      "pub_date": "1976-03-15",
+      "author": 4
+    }
+  },
+  {
+    "model": "todo_app.book",
+    "pk": 10,
+    "fields": {
+      "title": "Sultana's Dream",
+      "description": "A feminist utopian novella, envisioning a world where women rule and men are confined, written by Begum Rokeya.",
+      "pub_date": "1905-09-01",
+      "author": 5
+    }
+  },
+  {
+    "model": "todo_app.book",
+    "pk": 11,
+    "fields": {
+      "title": "Shadhinota Tumi",
+      "description": "A patriotic poem collection by Shamsur Rahman, celebrating Bangladesh's independence and struggles.",
+      "pub_date": "1971-12-16",
+      "author": 6
+    }
+  },
+  {
+    "model": "todo_app.book",
+    "pk": 12,
+    "fields": {
+      "title": "Nondito Noroke",
+      "description": "Humayun Ahmed's debut novel, exploring the complexities of human relationships in a middle-class family.",
+      "pub_date": "1972-01-01",
+      "author": 1
+    }
+  }
+]

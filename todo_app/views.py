@@ -1,12 +1,20 @@
+from asyncio import tasks
+from email.quoprimime import body_check
 from pickletools import read_uint1
+from pyexpat import model
 from re import escape
+from tracemalloc import take_snapshot
+from turtle import title
+from unittest import result
 from django.shortcuts import render, redirect
 
 import todo_app
-from .models import Task
+from .models import Task, Author, Book
 from .forms import SearchForm, AddTodoForm
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.forms.models import model_to_dict
 
 
 # Create your views here.
@@ -103,3 +111,56 @@ def update_todo(request, pk):
 
     except Task.DoesNotExist:
         return HttpResponse("Task does not exist!!!")
+
+
+def task_by_user_id(request, user_id):
+    # --------------------------------------------
+    # Type-1
+    # tasks = Task.objects.filter(user_id=user_id).values()
+    # return JsonResponse({"tasks": list(tasks)})
+    # --------------------------------------------
+    # Type-2
+    # tasks = Task.objects.filter(user_id=user_id)
+    # results = []
+    # for task in tasks:
+    #     results.append(
+    #         {
+    #             "title": task.title,
+    #             "user_id": task.user.id,
+    #             "username": task.user.username,
+    #         }
+    #     )
+    # return JsonResponse({"tasks": list(results)})
+    # --------------------------------------------
+    # Type-3
+    user = User.objects.get(pk=user_id)
+    # tasks = user.tasks_set.all().values()
+    tasks = user.tasks.all().values()
+    return JsonResponse({"tasks": list(tasks)})
+
+
+def all_books(request):
+    books = Book.objects.all().values()
+    return JsonResponse({"books": list(books)})
+
+
+def book(request, book_id):
+    book = Book.objects.get(id=book_id)
+    # return JsonResponse({"book": model_to_dict(book)})
+    book_details = {
+        "title": book.title,
+        "description": book.description,
+        "author": book.author.first_name + " " + book.author.last_name,
+    }
+    return JsonResponse({"book": book_details})
+
+
+def author(request, author_id):
+    author = Author.objects.get(id=author_id)
+    author_details = {
+        "first_name": author.first_name,
+        "last_name": author.last_name,
+        "bio": author.bio,
+        "book": [book.title for book in author.books.all()],
+    }
+    return JsonResponse({"book": author_details})

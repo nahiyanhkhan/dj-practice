@@ -1,4 +1,6 @@
 from django.urls import path
+
+from myapp import models
 from . import views
 
 urlpatterns = [
@@ -7,4 +9,8 @@ urlpatterns = [
     path("add/", views.add_todo, name="add_todo"),
     path("delete/<int:pk>/", views.delete_todo, name="delete_todo"),
     path("update/<int:pk>/", views.update_todo, name="update_todo"),
+    path("user/<int:user_id>/", views.task_by_user_id, name="task_user"),
+    path("books/", views.all_books, name="all_books"),
+    path("books/<int:book_id>", views.book, name="book"),
+    path("author/<int:author_id>", views.author, name="author"),
 ]

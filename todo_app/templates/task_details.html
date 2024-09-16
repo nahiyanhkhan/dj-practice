@@ -7,5 +7,7 @@
 <p><strong> Task Description:</strong> {{ task.description }}</p>
 <p><strong> Completed:</strong>{% if task.completed is False %} No {% else %} Yes {% endif %}</p>
 <p><strong> Due Date:</strong> {{ task.due_date }}</p>
+<p><strong> Username:</strong> {{ task.user.username }}</p>
+<p><strong> Name:</strong> {{ task.user.first_name }} {{ task.user.last_name }}</p>
 
 {% endblock %}

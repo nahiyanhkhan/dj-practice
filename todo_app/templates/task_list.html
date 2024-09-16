@@ -15,6 +15,7 @@
     <li>
         ({{ forloop.counter }})
         <!-- | {{ task.id }} | -->
+        {{ task.user.username }} |
         <a href="{% url 'task_details' task.pk %}">{{ task.title }}</a> |
         {{ task.description }} |
         {% if task.completed == True %} Completed ✅
