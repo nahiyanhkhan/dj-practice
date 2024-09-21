@@ -3,6 +3,7 @@
 {% block content %}
 
 <h1>All Tasks List</h1>
+<p>Username: {{ request.user }} || Session data: {{ request.session.mydata }} </data></p>
 
 <form method="post">
     {% csrf_token %}

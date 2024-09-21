@@ -14,6 +14,8 @@ from .forms import SearchForm, AddTodoForm
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.forms.models import model_to_dict
 
 
@@ -180,3 +182,32 @@ def book(request, book_id):
         ],
     }
     return JsonResponse({"book": book_details})
+
+
+def registration_view(request):
+    if request.method == "POST":
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+    else:
+        form = UserCreationForm()
+    return render(request, "registration.html", {"form": form})
+
+
+def login_view(request):
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            request.session["mydata"] = "This is my session data"
+            return redirect("task_list")
+    else:
+        form = AuthenticationForm()
+    return render(request, "login.html", {"form": form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("task_list")

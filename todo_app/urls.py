@@ -13,4 +13,7 @@ urlpatterns = [
     path("books/", views.all_books, name="all_books"),
     path("books/<int:book_id>", views.book, name="book"),
     path("author/<int:author_id>", views.author, name="author"),
+    path("registration/", views.registration_view, name="registration"),
+    path("login/", views.login_view, name="login"),
+    path("logout/", views.logout_view, name="logout"),
 ]
